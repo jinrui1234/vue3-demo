@@ -1,0 +1,59 @@
+<!--
+ * @Author: nibin
+ * @Date: 2023-03-16 20:11:24
+ * @LastEditors: nibin
+ * @LastEditTime: 2023-03-16 20:36:43
+ * @Description: file content
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>template</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      html,
+      body {
+        height: 100vh;
+        width: 100vw;
+        margin: 0px;
+      }
+
+      #app {
+        height: 100%;
+        background-color: #f5f5f5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script>
+      //创建一个组件(vue实例)
+      const app = Vue.createApp({
+        template: "<div><div>{{name}}</div><div>{{arr}}</div></div>",
+
+        //  响应式引用
+        //  ref-基本类型处理
+        //  reactive---复杂类型处理
+        setup(props, context) {
+          const { ref, reactive } = Vue;
+          let name = ref("21222");
+          let obj = reactive({ age: 10 });
+          let arr = reactive([1, 2, 3]);
+
+          //返回出去，才可以被调用
+          return {
+            name,
+            obj,
+            arr,
+          };
+        },
+      });
+      //挂载(必须放在最后)
+      const vm = app.mount("#root");
+    </script>
+  </body>
+</html>
