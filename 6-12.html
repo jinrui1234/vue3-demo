@@ -2,7 +2,7 @@
  * @Author: nibin
  * @Date: 2023-03-16 20:11:24
  * @LastEditors: nibin90169 nibin@cennavi.com.cn
- * @LastEditTime: 2023-03-17 09:33:12
+ * @LastEditTime: 2023-03-17 11:00:54
  * @Description: file content
 -->
 <!DOCTYPE html>
@@ -32,26 +32,48 @@
 <body>
   <div id="root"></div>
   <script>
-    //watchEffect
-
+    //provide // inject
+    //ref
     //创建一个组件(vue实例)
+    // const app = Vue.createApp({
+    //   template: "<div><child/></div>",
+
+    //   setup(props, context) {
+    //     const { ref, reactive, watchEffect, toRefs, provide } = Vue;
+    //     let name = ref(1111)
+    //     provide("name", name);
+    //     provide("changeName", (value) => {
+    //       name.value = value
+    //     });
+    //     return {};
+    //   },
+    // });
+    // // 注册组件
+    // app.component("child", {
+    //   template: "<div @click=add>{{name}}</div>",
+
+    //   setup(props, context) {
+    //     const { inject } = Vue;
+    //     const name = inject("name", "默认值");
+    //     const changeName = inject("changeName");
+    //     const add = () => {
+    //       changeName("333333333")
+    //     }
+    //     return { name, add };
+    //   },
+    // });
+
     const app = Vue.createApp({
-      template: "<div><child/></div>",
+      template: "<div ref='hello'>1111111111</div>",
 
       setup(props, context) {
-        const { ref, reactive, watchEffect, toRefs, provide } = Vue;
-        provide("name", "name1111");
-        return {};
-      },
-    });
-    // 注册组件
-    app.component("child", {
-      template: "<div>{{name}}</div>",
-
-      setup(props, context) {
-        const { inject } = Vue;
-        const name = inject("name", "默认值");
-        return { name };
+        const { ref, reactive, onMounted } = Vue;
+        //hello  名称等必须一致,获取ref元素节点
+        const hello = ref(null);
+        onMounted(() => {
+          console.log(hello.value, "hello")
+        })
+        return { hello };
       },
     });
 
